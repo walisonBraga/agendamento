@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PhotoService } from './photos/photo/photo.service';
 
 @Component({
   selector: 'app-root',
@@ -6,23 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  photos = [
-    {
-    url: 
-    'https://www.vero.com.br/wp-content/uploads/2017/05/coriolano.png', 
-    description: 'Barbearia'
-  },
-  {
-    url:
-    'https://radioriodejaneiro.digital/wp-content/uploads/2019/12/barbeiro.jpg',
-     description: 'Homem'
-  },
-  {
-    url:
-    'https://protectionforbeauty.volkdobrasil.com.br/blog/wp-content/uploads/2019/12/GettyImages-1158457201.jpg',
-     description: 'Mulher'
+
+  photos: Object[] = [];
+
+  constructor(photoService: PhotoService) {
+
+    photoService
+    .listFromUser('Flavio')
+    .subscribe(photos => this.photos = photos)
+
+
   }
-
-];
-
 }
